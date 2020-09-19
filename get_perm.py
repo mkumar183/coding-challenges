@@ -1,3 +1,4 @@
+# assumption: all digits are distinct
 def get_perm(inp):
     if len(inp) == 1:
         return inp
