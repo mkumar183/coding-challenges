@@ -13,20 +13,7 @@ let getShortestPrefixes = (list:Array<string>):Array<string> => {
     return prefixes;
 }
 
-let getIndexes = (elem:string, index, list:Array<string>):void => {
-    let ind:number = 0;
-    let returnValue:Array<number> = [];
-    ind = list.indexOf(elem);
-    while(ind != -1){
-        returnValue.push(ind)
-        ind = list.indexOf(elem,ind+1);
-    }
-    if (returnValue.length > 1) {
-        myDictionary[elem] = returnValue
-    }
-  }
-
-let addLettersToPrefixes = (prefixes:Array<string>, list:Array<string>) => {
+let addLettersToPrefixes = (prefixes:Array<string>, list:Array<string>, myDictionary) => {
     for (let key in myDictionary){
         for (let ind of myDictionary[key]){
             prefixes[ind] = list[ind].substring(0,prefixes[ind].length+1)
@@ -34,25 +21,34 @@ let addLettersToPrefixes = (prefixes:Array<string>, list:Array<string>) => {
     }
 }
 
-//start here
-let myDictionary = {};
+let getIndexes = (list:Array<string>):{} => {
+    let ind:number = 0;
+    let indexes = {}
+
+    for(let elem of list){
+        ind = list.indexOf(elem);
+        let returnValue:Array<number> = [];
+        while(ind != -1){
+            returnValue.push(ind)
+            ind = list.indexOf(elem,ind+1);
+        }
+        if (returnValue.length > 1){
+            indexes[elem] = returnValue;
+        }
+    }
+    return indexes;
+  }
+
 
 let main_09_09_2022 = () => {
-    let list:Array<string> = ['dog','cat','apple','appricot','fish','finish'];
-    let prefixes = getShortestPrefixes(list);
-    
-    console.log(prefixes);
-    
-    prefixes.forEach(getIndexes); // fills up mydictionary with duplicate keys
-    console.log(myDictionary);
-    while(Object.keys(myDictionary).length > 0){
-        addLettersToPrefixes(prefixes, list); // add additional letters to duplicate key values 
-        console.log(prefixes);
-        myDictionary = {}
-        prefixes.forEach(getIndexes); // refills mydictionary 
-        console.log(myDictionary);
+    let input:Array<string> = ['dog','cat','apple','appricot','fish','finish'];
+    let output = getShortestPrefixes(input);
+    let indexes = getIndexes(output);
+
+    while(Object.keys(indexes).length > 0){
+        addLettersToPrefixes(output, input, indexes); // add additional letters to duplicate key values 
+        indexes = getIndexes(output);
     }
-    console.log(prefixes);
-    
+    console.log(output);    
 }
 main_09_09_2022();
