@@ -4,15 +4,6 @@
  * Return the list:
  * d, c, app, apr, f 
  * */
-
-let getShortestPrefixes = (list:Array<string>):Array<string> => {
-    let prefixes:Array<string> = []
-    for(let item of list){
-        prefixes.push(item.substring(0,1));
-    }
-    return prefixes;
-}
-
 let addLettersToPrefixes = (prefixes:Array<string>, list:Array<string>, myDictionary) => {
     for (let key in myDictionary){
         for (let ind of myDictionary[key]){
@@ -42,12 +33,12 @@ let getIndexes = (list:Array<string>):{} => {
 
 let main_09_09_2022 = () => {
     let input:Array<string> = ['dog','cat','apple','appricot','fish','finish'];
-    let output = getShortestPrefixes(input);
+    let output = input.map(elem => elem.substring(0,1)) 
     let indexes = getIndexes(output);
 
     while(Object.keys(indexes).length > 0){
         addLettersToPrefixes(output, input, indexes); // add additional letters to duplicate key values 
-        indexes = getIndexes(output);
+        indexes = getIndexes(output); // check if duplicates still exists
     }
     console.log(output);    
 }
