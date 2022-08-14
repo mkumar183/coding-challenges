@@ -26,7 +26,7 @@ let getIndexes = (elem:string, index, list:Array<string>):void => {
     }
   }
 
-let addLettersToPrefixes = () => {
+let addLettersToPrefixes = (prefixes:Array<string>, list:Array<string>) => {
     for (let key in myDictionary){
         for (let ind of myDictionary[key]){
             prefixes[ind] = list[ind].substring(0,prefixes[ind].length+1)
@@ -35,19 +35,24 @@ let addLettersToPrefixes = () => {
 }
 
 //start here
-let myDictionary = {}
-let list:Array<string> = ['dog','cat','apple','appricot','fish','finish'];
-let prefixes = getShortestPrefixes(list);
+let myDictionary = {};
 
-console.log(prefixes);
-
-prefixes.forEach(getIndexes); // fills up mydictionary with duplicate keys
-console.log(myDictionary);
-while(Object.keys(myDictionary).length > 0){
-    addLettersToPrefixes(); // add additional letters to duplicate key values 
+let main_09_09_2022 = () => {
+    let list:Array<string> = ['dog','cat','apple','appricot','fish','finish'];
+    let prefixes = getShortestPrefixes(list);
+    
     console.log(prefixes);
-    myDictionary = {}
-    prefixes.forEach(getIndexes); // refills mydictionary 
+    
+    prefixes.forEach(getIndexes); // fills up mydictionary with duplicate keys
     console.log(myDictionary);
+    while(Object.keys(myDictionary).length > 0){
+        addLettersToPrefixes(prefixes, list); // add additional letters to duplicate key values 
+        console.log(prefixes);
+        myDictionary = {}
+        prefixes.forEach(getIndexes); // refills mydictionary 
+        console.log(myDictionary);
+    }
+    console.log(prefixes);
+    
 }
-console.log(prefixes);
+main_09_09_2022();

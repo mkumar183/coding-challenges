@@ -1,16 +1,8 @@
 /**
  * Given a list of words, return the shortest unique prefix of each word. For example, given the list:
- * dog
- * cat
- * apple
- * apricot
- * fish
+ * dog, cat, apple, apricot, fish
  * Return the list:
- * d
- * c
- * app
- * apr
- * f
+ * d, c, app, apr, f
  * */
 var getShortestPrefixes = function (list) {
     var prefixes = [];
@@ -32,7 +24,7 @@ var getIndexes = function (elem, index, list) {
         myDictionary[elem] = returnValue;
     }
 };
-var addLettersToPrefixes = function () {
+var addLettersToPrefixes = function (prefixes, list) {
     for (var key in myDictionary) {
         for (var _i = 0, _a = myDictionary[key]; _i < _a.length; _i++) {
             var ind = _a[_i];
@@ -42,16 +34,19 @@ var addLettersToPrefixes = function () {
 };
 //start here
 var myDictionary = {};
-var list = ['dog', 'cat', 'apple', 'appricot', 'fish', 'finish'];
-var prefixes = getShortestPrefixes(list);
-console.log(prefixes);
-prefixes.forEach(getIndexes); // fills up mydictionary with duplicate keys
-console.log(myDictionary);
-while (Object.keys(myDictionary).length > 0) {
-    addLettersToPrefixes(); // add additional letters to duplicate key values 
+var main_09_09_2022 = function () {
+    var list = ['dog', 'cat', 'apple', 'appricot', 'fish', 'finish'];
+    var prefixes = getShortestPrefixes(list);
     console.log(prefixes);
-    myDictionary = {};
-    prefixes.forEach(getIndexes); // refills mydictionary 
+    prefixes.forEach(getIndexes); // fills up mydictionary with duplicate keys
     console.log(myDictionary);
-}
-console.log(prefixes);
+    while (Object.keys(myDictionary).length > 0) {
+        addLettersToPrefixes(prefixes, list); // add additional letters to duplicate key values 
+        console.log(prefixes);
+        myDictionary = {};
+        prefixes.forEach(getIndexes); // refills mydictionary 
+        console.log(myDictionary);
+    }
+    console.log(prefixes);
+};
+main_09_09_2022();
