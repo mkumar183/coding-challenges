@@ -34,7 +34,7 @@ let myReduce = (list:Array<any>, callback: Function, initial:any):any => {
 let main_12_09_2022 = () => {
     let list1 = [1,2,3,4,5]
     let list2 = ['a','b','c','e','d']
-    console.log(myReduce(list1, add, 0));
+    console.log(myReduce(list1, sum, 0));
     console.log(myReduce(list1, multiply, 0));
     console.log(myReduce(list2, add, ''));    
 }

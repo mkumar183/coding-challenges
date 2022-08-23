@@ -29,7 +29,7 @@ var myReduce = function (list, callback, initial) {
 var main_12_09_2022 = function () {
     var list1 = [1, 2, 3, 4, 5];
     var list2 = ['a', 'b', 'c', 'e', 'd'];
-    console.log(myReduce(list1, add, 0));
+    console.log(myReduce(list1, sum, 0));
     console.log(myReduce(list1, multiply, 0));
     console.log(myReduce(list2, add, ''));
 };
